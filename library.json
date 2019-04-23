@@ -1,17 +1,17 @@
 {
-    "name": "SerialCommands",
+    "name": "SerialCommandsExtended",
     "authors":
     {
-        "name": "Pedro Tiago Pereira",
-        "email": "tiago.private@gmail.com",
-        "url": "https://github.com/ppedro74"
+        "name": "Sebastian Mueller",
+        "email": "sebastian@mueller.hk",
+        "url": "https://github.com/sebmueller/Arduino-SerialCommands"
     },
     "keywords": "serial, command, commands, cmd, parse, callback",
     "description": "A Library to tokenize and parse commands received over a serial port. Simple and small memory footprint (no dynamic memory allocation)",
     "repository":
     {
         "type": "git",
-        "url": "https://github.com/ppedro74/Arduino-SerialCommands.git"
+        "url": "https://github.com/sebmueller/Arduino-SerialCommands.git"
     },
     "frameworks": "arduino",
     "platforms": "*"
