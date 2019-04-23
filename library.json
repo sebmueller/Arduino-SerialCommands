@@ -1,18 +1,23 @@
 {
-    "name": "SerialCommandsExtended",
-    "authors":
+  "libraries": [
+   
     {
-        "name": "Sebastian Mueller",
-        "email": "sebastian@mueller.hk",
-        "url": "https://github.com/sebmueller/Arduino-SerialCommands"
-    },
-    "keywords": "serial, command, commands, cmd, parse, callback",
-    "description": "A Library to tokenize and parse commands received over a serial port. Simple and small memory footprint (no dynamic memory allocation)",
-    "repository":
-    {
-        "type": "git",
-        "url": "https://github.com/sebmueller/Arduino-SerialCommands.git"
-    },
-    "frameworks": "arduino",
-    "platforms": "*"
+      "name": "SerialCommandsExtended",
+      "version": "1.0.0",
+      "author": "Sebastian Mueller",
+      "maintainer": "Sebastian Mueller",
+      "sentence": "Serial command parser - extended",
+      "paragraph": "changed to use more than 1 char delimiter - possibility of parsing external strings",
+      "website": "https://github.com/sebmueller/Arduino-SerialCommands",
+      "category": "Other",
+      "architectures": [
+        "*"
+      ],
+      "types": [
+        "Arduino"
+      ],
+      "url": "https://github.com/sebmueller/Arduino-SerialCommands/archive/master.zip",
+      "archiveFileName": "SerialCommands-1.0.0.zip",
+    }
+  ]
 }
