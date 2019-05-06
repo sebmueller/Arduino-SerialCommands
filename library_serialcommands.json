@@ -3,7 +3,7 @@
    
     {
       "name": "SerialCommandsExtended",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": "Sebastian Mueller",
       "maintainer": "Sebastian Mueller",
       "sentence": "Serial command parser - extended",
@@ -17,7 +17,7 @@
         "Arduino"
       ],
       "url": "https://github.com/sebmueller/Arduino-SerialCommands/archive/master.zip",
-      "archiveFileName": "SerialCommands-1.0.0.zip" 
+      "archiveFileName": "SerialCommandsExtended-1.0.1.zip" 
     }
   ]
 }

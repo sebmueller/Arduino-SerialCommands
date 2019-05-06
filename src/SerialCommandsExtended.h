@@ -18,13 +18,13 @@ typedef enum ternary
 	SERIAL_COMMANDS_ERROR_BUFFER_FULL
 } SERIAL_COMMANDS_ERRORS;
 
-class SerialCommands;
+class SerialCommandsExtended;
 
-typedef class SerialCommand SerialCommand;
-class SerialCommand
+typedef class SerialCommandExtended SerialCommandExtended;
+class SerialCommandExtended
 {
 public:
-	SerialCommand(const char* cmd, void(*func)(SerialCommands*), bool one_k=false)
+	SerialCommandExtended(const char* cmd, void(*func)(SerialCommandsExtended*), bool one_k=false)
 		: command(cmd),
 		function(func),
 		next(NULL),
@@ -33,15 +33,15 @@ public:
 	}
 
 	const char* command;
-	void(*function)(SerialCommands*);
-	SerialCommand* next;
+	void(*function)(SerialCommandsExtended*);
+	SerialCommandExtended* next;
 	bool one_key;
 };
 
-class SerialCommands
+class SerialCommandsExtended
 {
 public:
-	SerialCommands(Stream* serial, char* buffer, int16_t buffer_len, const char* term = "\r\n", const char* delim = " ") :
+	SerialCommandsExtended(Stream* serial, char* buffer, int16_t buffer_len, const char* term = "\r\n", const char* delim = " ") :
 		serial_(serial),
 		buffer_(buffer),
 		buffer_len_(buffer!=NULL && buffer_len > 0 ? buffer_len - 1 : 0), //string termination char '\0'
@@ -65,7 +65,7 @@ public:
 	 * \brief Adds a command handler (Uses a linked list)
 	 * \param command 
 	 */
-	void AddCommand(SerialCommand* command);
+	void AddCommand(SerialCommandExtended* command);
 
 	/**
 	 * \brief Checks the Serial port, reads the input buffer and calls a matching command handler.
@@ -94,7 +94,7 @@ public:
 	 * \brief Sets a default handler can be used for a catch all or unrecognized commands
 	 * \param function 
 	 */
-	void SetDefaultHandler(void(*function)(SerialCommands*, const char*));
+	void SetDefaultHandler(void(*function)(SerialCommandsExtended*, const char*));
 	
 	/**
 	 * \brief Clears the buffer, and resets the indexes.
@@ -113,14 +113,14 @@ private:
 	int16_t buffer_len_;
 	const char* term_;
 	const char* delim_;
-	void(*default_handler_)(SerialCommands*, const char*);
+	void(*default_handler_)(SerialCommandsExtended*, const char*);
 	int16_t buffer_pos_;
 	char* last_token_;
 	int8_t term_pos_;
-	SerialCommand* commands_head_;
-	SerialCommand* commands_tail_;
-	SerialCommand* onek_cmds_head_;
-	SerialCommand* onek_cmds_tail_;
+	SerialCommandExtended* commands_head_;
+	SerialCommandExtended* commands_tail_;
+	SerialCommandExtended* onek_cmds_head_;
+	SerialCommandExtended* onek_cmds_tail_;
 	uint8_t commands_count_;
 	uint8_t onek_cmds_count_;
 

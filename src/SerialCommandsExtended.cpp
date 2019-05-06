@@ -4,9 +4,9 @@ License		: BSD
 Repository	: https://github.com/ppedro74/Arduino-SerialCommands
 --------------------------------------------------------------------*/
 
-#include "SerialCommands.h"
+#include "SerialCommandsExtended.h"
 
-void SerialCommands::AddCommand(SerialCommand* command)
+void SerialCommandsExtended::AddCommand(SerialCommandExtended* command)
 {
 #ifdef SERIAL_COMMANDS_DEBUG
 	Serial.print("Adding #");
@@ -21,8 +21,8 @@ void SerialCommands::AddCommand(SerialCommand* command)
 	Serial.println();
 #endif
 	// Default linked list is commands_????
-	SerialCommand** cmd_head=&commands_head_;
-	SerialCommand** cmd_tail=&commands_tail_;
+	SerialCommandExtended** cmd_head=&commands_head_;
+	SerialCommandExtended** cmd_tail=&commands_tail_;
 	uint8_t *cmd_count = &commands_count_;
 
 	if(command->one_key)
@@ -45,7 +45,7 @@ void SerialCommands::AddCommand(SerialCommand* command)
 	(*cmd_count)++;
 }
 
-SERIAL_COMMANDS_ERRORS SerialCommands::ReadSerial()
+SERIAL_COMMANDS_ERRORS SerialCommandsExtended::ReadSerial()
 {
 	if (serial_ == NULL)
 	{
@@ -117,7 +117,7 @@ SERIAL_COMMANDS_ERRORS SerialCommands::ReadSerial()
 			{
 				boolean matched = false;
 				int cx;
-				SerialCommand* cmd;
+				SerialCommandExtended* cmd;
 				for (cmd = commands_head_, cx = 0; cmd != NULL; cmd = cmd->next, cx++)
 				{
 #ifdef SERIAL_COMMANDS_DEBUG
@@ -152,14 +152,14 @@ SERIAL_COMMANDS_ERRORS SerialCommands::ReadSerial()
 	return SERIAL_COMMANDS_SUCCESS;
 }
 
-bool SerialCommands::CheckOneKeyCmd()
+bool SerialCommandsExtended::CheckOneKeyCmd()
 {
 #ifdef SERIAL_COMMANDS_DEBUG
 	Serial.println("Testing for one_key commands.");
 #endif
 
 	int cx;
-	SerialCommand* cmd;
+	SerialCommandExtended* cmd;
 	for (cmd = onek_cmds_head_, cx = 0; cmd != NULL; cmd = cmd->next, cx++)
 	{
 #ifdef SERIAL_COMMANDS_DEBUG
@@ -185,34 +185,34 @@ bool SerialCommands::CheckOneKeyCmd()
 }
 
 
-Stream* SerialCommands::GetSerial()
+Stream* SerialCommandsExtended::GetSerial()
 {
 	return serial_;
 }
 
-void SerialCommands::AttachSerial(Stream* serial)
+void SerialCommandsExtended::AttachSerial(Stream* serial)
 {
 	serial_ = serial;
 }
 
-void SerialCommands::DetachSerial()
+void SerialCommandsExtended::DetachSerial()
 {
 	serial_ = NULL;
 }
 
-void SerialCommands::SetDefaultHandler(void(*function)(SerialCommands*, const char*))
+void SerialCommandsExtended::SetDefaultHandler(void(*function)(SerialCommandsExtended*, const char*))
 {
 	default_handler_ = function;
 }
 
-void SerialCommands::ClearBuffer()
+void SerialCommandsExtended::ClearBuffer()
 {
 	buffer_[0] = '\0';
 	buffer_pos_ = 0;
 	term_pos_ = 0;
 }
 
-char* SerialCommands::Next()
+char* SerialCommandsExtended::Next()
 {
 	return strtok_r(NULL, delim_, &last_token_);
 }

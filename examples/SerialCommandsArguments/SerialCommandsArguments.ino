@@ -7,7 +7,7 @@ SerialCommands - Playing with Arguments
 
 --------------------------------------------------------------------*/
 #include <Arduino.h>
-#include "SerialCommands.h"
+#include "SerialCommandsExtended.h"
 
 //Arduino UNO PWM pins
 const int kRedLedPin = 3;
@@ -15,10 +15,10 @@ const int kGreenLedPin = 5;
 const int kBlueLedPin = 9;
 
 char serial_command_buffer_[32];
-SerialCommands serial_commands_(&Serial, serial_command_buffer_, sizeof(serial_command_buffer_), "\r\n", " ");
+SerialCommandsExtended serial_commands_(&Serial, serial_command_buffer_, sizeof(serial_command_buffer_), "\r\n", " ");
 
 //This is the default handler, and gets called when no other command matches. 
-void cmd_unrecognized(SerialCommands* sender, const char* cmd)
+void cmd_unrecognized(SerialCommandsExtended* sender, const char* cmd)
 {
 	sender->GetSerial()->print("Unrecognized command [");
 	sender->GetSerial()->print(cmd);
@@ -26,7 +26,7 @@ void cmd_unrecognized(SerialCommands* sender, const char* cmd)
 }
 
 //expects one single parameter
-void cmd_analog_read(SerialCommands* sender)
+void cmd_analog_read(SerialCommandsExtended* sender)
 {
 	//Note: Every call to Next moves the pointer to next parameter
 
@@ -105,7 +105,7 @@ bool set_led(char* led, int pwm)
 //e.g. LED 128 red
 //     LED 128 red blue
 //     LED 0 red blue green
-void cmd_rgb_led(SerialCommands* sender)
+void cmd_rgb_led(SerialCommandsExtended* sender)
 {
 	//Note: Every call to Next moves the pointer to next parameter
 
@@ -136,8 +136,8 @@ void cmd_rgb_led(SerialCommands* sender)
 }
 
 
-SerialCommand cmd_analog_read_("AREAD", cmd_analog_read);
-SerialCommand cmd_rgb_led_("LED", cmd_rgb_led);
+SerialCommandExtended cmd_analog_read_("AREAD", cmd_analog_read);
+SerialCommandExtended cmd_rgb_led_("LED", cmd_rgb_led);
 
 void setup() 
 {
