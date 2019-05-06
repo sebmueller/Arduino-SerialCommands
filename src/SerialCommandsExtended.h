@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------
-Author		: Pedro Pereira
+Author		: Sebastian Mueller
 License		: BSD
-Repository	: https://github.com/ppedro74/Arduino-SerialCommands
+Repository	: https://github.com/sebmueller/Arduino-SerialCommands
 --------------------------------------------------------------------*/
 
 //#define SERIAL_COMMANDS_DEBUG
@@ -15,7 +15,8 @@ typedef enum ternary
 {
 	SERIAL_COMMANDS_SUCCESS = 0,
 	SERIAL_COMMANDS_ERROR_NO_SERIAL,
-	SERIAL_COMMANDS_ERROR_BUFFER_FULL
+	SERIAL_COMMANDS_ERROR_BUFFER_FULL,
+	SERIAL_COMMANDS_ERROR_BUFFER_EMPTY
 } SERIAL_COMMANDS_ERRORS;
 
 class SerialCommandsExtended;
@@ -72,6 +73,8 @@ public:
 	 * \return SERIAL_COMMANDS_SUCCESS when successful or SERIAL_COMMANDS_ERROR_XXXX on error.
 	 */
 	SERIAL_COMMANDS_ERRORS ReadSerial();
+
+	SERIAL_COMMANDS_ERRORS HandleBuffer(char* _buffer);
 
 	/**
 	 * \brief Returns the source stream (Serial port)
@@ -133,3 +136,6 @@ private:
 };
 
 #endif
+
+//Added by Sloeber 
+#pragma once
